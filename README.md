@@ -1,6 +1,8 @@
 # pathname
 
-A very small and simple collection of functions for manipulating POSIX pathnames. It operates on the honor system and does not make any file system related system calls or perform Dot-Dot resolution. It's just string munging.
+A very small and simple collection of C++ functions for manipulating POSIX pathnames. It operates on
+the honor system and does not make any file system related system calls or perform Dot-Dot
+resolution. It's just string munging.
 
 join(paths...) works as you would expect:
 
@@ -12,7 +14,9 @@ join(paths...) works as you would expect:
 
 `pathname::is_absolute("/tmp")` -> `true`
 
-dir(path) and base(path) are similar to the dirname and basename utilities except that the functions consider a trailing slash to indicate a directory name, unlike dirname and basename (I will never, ever understand this).
+dir(path) and base(path) are similar to the dirname and basename utilities except that the functions
+consider a trailing slash to indicate a directory name, unlike dirname and basename (I will never,
+ever understand this).
 
 `pathname::dir("/home/")` -> `"/home/"`
 

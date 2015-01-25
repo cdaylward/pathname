@@ -12,13 +12,17 @@ join(paths...) works as you would expect:
 
 `pathname::join("data/", "/tmp/", "/file")` -> `"data/tmp/file"`
 
+this is not a surprise:
+
 `pathname::is_absolute("/tmp")` -> `true`
 
-dir(path) and base(path) are similar to the dirname and basename utilities except that the functions
-consider a trailing slash to indicate a directory name, unlike dirname and basename (I will never,
-ever understand this).
+`pathname::is_absolute("tmp")` -> `false`
 
-`pathname::dir("/home/")` -> `"/home/"`
+dir(path) and base(path) are similar to the dirname and basename utilities _except_ that the functions
+consider a trailing slash to indicate a directory name, unlike dirname and basename (I will never,
+ever understand this):
+
+`pathname::dir("/home/")` -> `"/home"`
 
 `pathname::dir("/data/tmp/file")` -> `"/data/tmp"`
 

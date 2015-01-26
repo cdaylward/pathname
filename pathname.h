@@ -78,4 +78,16 @@ inline bool is_absolute(const std::string& path) {
 }
 
 
+inline bool has_dot_dot(const std::string& path) {
+  if (path == "..") return true;
+  // /.. is a special case of / per IEEE Std 1003.1-2001
+  if (path == "/..") return false;
+  if (path.length() < 3) return false;
+  if (path.compare(0, 3, "../") == 0) return true;
+  if (path.compare(path.length() - 3, 3, "/..") == 0) return true;
+  if (path.find("/../") != std::string::npos) return true;
+  return false;
+}
+
+
 } // namespace pathname

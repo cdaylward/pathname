@@ -53,3 +53,24 @@ TEST(pathname, is_absolute) {
   ASSERT_FALSE(pathname::is_absolute(""));
   ASSERT_FALSE(pathname::is_absolute("one/two/"));
 }
+
+
+TEST(pathname, has_dot_dot) {
+  ASSERT_TRUE(pathname::has_dot_dot(".."));
+  ASSERT_TRUE(pathname::has_dot_dot("../"));
+  ASSERT_TRUE(pathname::has_dot_dot("./.."));
+  ASSERT_TRUE(pathname::has_dot_dot("../."));
+  ASSERT_TRUE(pathname::has_dot_dot("../dir"));
+  ASSERT_TRUE(pathname::has_dot_dot("dir/.."));
+  ASSERT_TRUE(pathname::has_dot_dot("dir/dir/../dir/dir"));
+
+  ASSERT_FALSE(pathname::has_dot_dot("/.."));
+  ASSERT_FALSE(pathname::has_dot_dot("."));
+  ASSERT_FALSE(pathname::has_dot_dot("/./"));
+  ASSERT_FALSE(pathname::has_dot_dot("..dir"));
+  ASSERT_FALSE(pathname::has_dot_dot("dir.."));
+  ASSERT_FALSE(pathname::has_dot_dot("..dir.."));
+  ASSERT_FALSE(pathname::has_dot_dot("dir../"));
+  ASSERT_FALSE(pathname::has_dot_dot("/..dir"));
+  ASSERT_FALSE(pathname::has_dot_dot("./..dir../."));
+}

@@ -29,6 +29,24 @@ TEST(pathname, join) {
 }
 
 
+TEST(pathname, split) {
+  using V = std::vector<std::string>;
+  ASSERT_EQ(V({"/"}), pathname::split("/"));
+  ASSERT_EQ(V({"/"}), pathname::split("//"));
+  ASSERT_EQ(V({"one"}), pathname::split("one"));
+  ASSERT_EQ(V({"/", "one"}), pathname::split("/one"));
+  ASSERT_EQ(V({"one", "two"}), pathname::split("one/two"));
+  ASSERT_EQ(V({"/", "one", "two"}), pathname::split("/one/two"));
+  ASSERT_EQ(V({"/", "one", "two", "three"}), pathname::split("/one/two/three"));
+  ASSERT_EQ(V({"/", "one", "two", "three"}), pathname::split("/one/two/three/"));
+}
+
+
+TEST(pathname, split_join_inverse) {
+  ASSERT_EQ("/one/two/three", pathname::join(pathname::split("/one/two/three/")));
+}
+
+
 TEST(pathname, base) {
   ASSERT_EQ(".", pathname::base("/one/two/three/"));
   ASSERT_EQ("three", pathname::base("/one/two/three"));
